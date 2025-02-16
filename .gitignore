@@ -1,0 +1,9 @@
+# Ignore environment variables and API keys
+.env
+cred.json
+config.py
+
+# Ignore Python cache and virtual environments
+venv/
+__pycache__/
+*.pyc
