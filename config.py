@@ -1,8 +1,6 @@
-import json
+import streamlit as st
 
 def load_config():
-    """Load credentials from cred.json"""
-    with open("cred.json", "r") as file:
-        return json.load(file)
+    return st.secrets["database"]  # Load from Streamlit Secrets
 
 config = load_config()
