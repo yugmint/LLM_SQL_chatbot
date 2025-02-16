@@ -2,14 +2,18 @@ import os
 import streamlit as st
 from langchain.chat_models import init_chat_model
 
-# Debugging: Check if the key is retrieved correctly
-grok_api_key = st.secrets.get("grok_api_key")
+# Debugging: Print all secrets to check the structure
+st.write("Secrets:", st.secrets)
 
-if grok_api_key:
-    os.environ["GROQ_API_KEY"] = grok_api_key
-else:
-    st.error("❌ GROQ_API_KEY is missing! Check your Streamlit Secrets.")
+try:
+    # Access nested API key correctly
+    grok_api_key = st.secrets["api"]["grok_api_key"]
+except KeyError:
+    st.error("❌ Error: Could not find 'grok_api_key' in Streamlit Secrets. Check your secrets file.")
     raise ValueError("GROQ_API_KEY is missing! Make sure it's set in Streamlit Secrets.")
+
+# Set environment variable
+os.environ["GROQ_API_KEY"] = grok_api_key
 
 def get_llm():
     """Initialize and return the LLM model."""
