@@ -2,6 +2,7 @@
 .env
 cred.json
 config.py
+chabot_env
 
 # Ignore Python cache and virtual environments
 venv/
